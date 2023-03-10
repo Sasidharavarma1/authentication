@@ -30,7 +30,7 @@ const Addnew = () => {
     e.preventDefault();
     UserService.addnew(eventname, price, quantity);
     // }
-    navigate("/home")
+    navigate("/uploadedevents")
   };
   return (
     <div className="col-6 col-md-12">

@@ -5,13 +5,17 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../redux/slices/SliceTks";
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -30,14 +34,15 @@ const Register = () => {
     e.preventDefault();
     setMessage("User Registered");
     setSuccessful(false);
-    AuthService.register(username, email, password).then(
-      (response) => {
-        setMessage(response.data.message);
-        setSuccessful(true);
-      }
-
-    );
-    navigate("/login")
+    dispatch(register({ username, password,email }))
+    .unwrap()
+    .then(() => {
+      navigate("/login");
+      window.location.reload();
+    })
+    .catch(() => {
+      setLoading(false);
+    });
     // }
   };
   return (

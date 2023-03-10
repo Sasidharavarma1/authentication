@@ -4,11 +4,12 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
-
+import { useDispatch } from "react-redux";
+import { login } from "../redux/slices/SliceTks";
 
 const Login = () => {
   let navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const form = useRef();
   const checkBtn = useRef();
 
@@ -25,36 +26,21 @@ const Login = () => {
     const password = e.target.value;
     setPassword(password);
   };
-
+  
   const handleLogin = (e) => {
     e.preventDefault();
-
-
-    setLoading(true);
-
-    form.current.validateAll();
     console.log(userName);
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(userName, password).then(
-        () => {
-          navigate("/home");
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setLoading(false);
-
-        }
-      );
-    } else {
-      setLoading(false);
-    }
+    console.log(password);
+    setLoading(true);
+    dispatch(login({ userName, password }))
+      .unwrap()
+      .then(() => {
+        navigate("/home");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -98,3 +84,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
