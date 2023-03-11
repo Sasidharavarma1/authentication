@@ -29,8 +29,6 @@ const Login = () => {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(userName);
-    console.log(password);
     setLoading(true);
     dispatch(login({ userName, password }))
       .unwrap()

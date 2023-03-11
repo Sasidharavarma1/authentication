@@ -3,8 +3,9 @@ import Form from "react-validation/build/form";
 import { useParams } from 'react-router-dom';
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateEventPrice } from "../redux/slices/UpdateEventsSlice";
 function UpdateEvent(props) {
   const { eid } = useParams();
   const { eeventname } = useParams();
@@ -17,29 +18,26 @@ function UpdateEvent(props) {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [successful, setSuccessful] = useState(false);
-
-  const onChangEventname = (e) => {
-    const eventname = e.target.value;
-    setEventname(eventname);
-  };
+  const dispatch=useDispatch();
+  
   const onChangePrice = (e) => {
     const price = e.target.value;
     setPrice(price);
   };
-  const onChangeQuantity = (e) => {
-    const quantity = e.target.value;
-    setQuantity(quantity);
-  };
+
   const navigate = useNavigate();
   const handleUpdateevent = (e) => {
     e.preventDefault();
-    UserService.update(eid, eeventname, price, equantity);
-    // }
-    navigate("/uploadedevents")
+    dispatch(updateEventPrice({ eid, eeventname,price,equantity }))
+    .unwrap()
+    .then(() => {
+      navigate("/uploadedevents");
+      window.location.reload();
+    })
   };
+  
   return (
     <div>
-
       <div className="col-md-12">
         <div className="card card-container">
           <Form onSubmit={handleUpdateevent} ref={form}>
@@ -53,8 +51,6 @@ function UpdateEvent(props) {
                     name="eventname"
                     value={eventname}
                     disabled
-                  // onChange={onChangEventname}
-
                   />
                 </div>
                 <div className="form-group">
@@ -75,10 +71,8 @@ function UpdateEvent(props) {
                     name="quantity"
                     disabled
                     value={quantity}
-                  //onChange={onChangeQuantity}  
                   />
                 </div>
-
                 <div className="form-group">
                   <button className="btn btn-primary btn-block">Update Event</button>
                 </div>

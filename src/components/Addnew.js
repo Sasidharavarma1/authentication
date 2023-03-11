@@ -5,6 +5,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { addNew } from "../redux/slices/AddNew";
+import { useDispatch } from "react-redux";
 const Addnew = () => {
   const form = useRef();
   const checkBtn = useRef();
@@ -12,7 +14,7 @@ const Addnew = () => {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [successful, setSuccessful] = useState(false);
-
+  const dispatch=useDispatch(); 
   const onChangEventname = (e) => {
     const eventname = e.target.value;
     setEventname(eventname);
@@ -28,9 +30,12 @@ const Addnew = () => {
   const navigate = useNavigate();
   const handleAddevent = (e) => {
     e.preventDefault();
-    UserService.addnew(eventname, price, quantity);
-    // }
-    navigate("/uploadedevents")
+    dispatch(addNew({ eventname, price,quantity }))
+    .unwrap()
+    .then(() => {
+      navigate("/uploadedevents");
+      window.location.reload();
+    })
   };
   return (
     <div className="col-6 col-md-12">
