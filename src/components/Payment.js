@@ -3,10 +3,11 @@ import Form from "react-validation/build/form";
 import { useParams } from 'react-router-dom';
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import UserService from "../services/user.service";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { pay } from "../redux/slices/PaymentSlice";
 function Payment(props) {
-
+  const dispatch=useDispatch();
   const { id } = useParams();
   const form = useRef();
   const checkBtn = useRef();
@@ -25,8 +26,12 @@ function Payment(props) {
   const navigate = useNavigate();
   const handlePaymentDetails = (e) => {
     e.preventDefault();
-    UserService.paymentdetail(id, creditcardno, expiry);
-    navigate("/orders")
+    dispatch(pay({ id,creditcardno,expiry }))
+      .unwrap()
+      .then(() => {
+        navigate("/orders")
+        window.location.reload();
+      })  
   };
   return (
     <div>
