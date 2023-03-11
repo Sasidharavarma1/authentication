@@ -7,6 +7,7 @@ import updateEventSlice from "./slices/UpdateEventsSlice";
 import orderSlice from "./slices/MyOrdersSlice";
 import fetchOrdersSlice from "./slices/CartSlice";
 import paySlice from "./slices/PaymentSlice";
+import fetchConfirmedOrdersSlice from "./slices/ConfirmedOrdersSlice"
 const store=configureStore({
     reducer:{
         auth:sliceTks,
@@ -16,7 +17,8 @@ const store=configureStore({
         updateevents:updateEventSlice,
         orderEvent:orderSlice,
         order:fetchOrdersSlice,
-        payprocess:paySlice
+        payprocess:paySlice,
+        confirmedorder:fetchConfirmedOrdersSlice
     }
 })
 export default store;

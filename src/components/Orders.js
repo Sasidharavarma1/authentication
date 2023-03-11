@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import UserService from "../services/user.service";
-class Orders extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            events: []
-        }
-    }
-    componentDidMount() {
-        UserService.getallticketsofuser().then((response) => {
-            this.setState({ events: response.data })
-        });
-    }
-    render() {
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchConfirmedOrders } from '../redux/slices/ConfirmedOrdersSlice';
+function Orders() {
+    const events = useSelector(state => state.confirmedorder.eventsList);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(fetchConfirmedOrders());
+    }, [dispatch]);
         return (
             <div>
                 <h1 className="text-center">Confirmed Tickets</h1>
@@ -26,7 +21,7 @@ class Orders extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.events.map((event) =>
+                            events.map((event) =>
                                 <tr key={event.ticketid}>
                                     <td> {event.eventname}</td>
                                     <td> {event.buyticks}</td>
@@ -39,6 +34,6 @@ class Orders extends Component {
             </div>
         );
     }
-}
+
 
 export default Orders;
