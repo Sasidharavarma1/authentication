@@ -22,6 +22,7 @@ function Home() {
             <td> Event Name</td>
             <td> Price</td>
             <td> Quantity</td>
+            <td>         </td>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +33,7 @@ function Home() {
               <td> {event.quantity}</td>
               <td>
                 <Link to={`/order/${event.eventid}`}>
-                  <span className="bg-success button">Order</span>
+                  <span className="button">Order</span>
                 </Link>
               </td>
             </tr>

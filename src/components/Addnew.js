@@ -7,6 +7,7 @@ import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { addNew } from "../redux/slices/AddNew";
 import { useDispatch } from "react-redux";
+import "../css/table.css"
 
 const Addnew = () => {
   const form = useRef();
