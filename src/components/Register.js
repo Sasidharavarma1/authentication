@@ -3,10 +3,10 @@ import Form from "react-validation/build/form";
 import 'react-inputs-validation/lib/react-inputs-validation.min.css';
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import AuthService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../redux/slices/SliceTks";
+
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
@@ -17,38 +17,46 @@ const Register = () => {
   const [successful, setSuccessful] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
   };
+
   const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
   };
+
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
   };
+
   const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
+    if (password.length < 8) {
+      setMessage("Password must be at least 8 characters long");
+      return;
+    }
     setMessage("User Registered");
     setSuccessful(false);
-    dispatch(register({ username, password,email }))
-    .unwrap()
-    .then(() => {
-      navigate("/login");
-      window.location.reload();
-    })
-    .catch(() => {
-      setLoading(false);
-    });
-    // }
+    dispatch(register({ username, password, email }))
+      .unwrap()
+      .then(() => {
+        navigate("/login");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
+
   return (
     <div className="col-md-12">
       <div className="card card-container">
-
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
@@ -82,7 +90,6 @@ const Register = () => {
                   onChange={onChangePassword}
                 />
               </div>
-
               <div className="form-group">
                 <button className="btn btn-primary btn-block">Sign Up</button>
               </div>
@@ -106,4 +113,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;

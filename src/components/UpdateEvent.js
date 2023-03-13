@@ -28,13 +28,18 @@ function UpdateEvent(props) {
   const navigate = useNavigate();
   const handleUpdateevent = (e) => {
     e.preventDefault();
-    dispatch(updateEventPrice({ eid, eeventname,price,equantity }))
-    .unwrap()
-    .then(() => {
-      navigate("/uploadedevents");
-      window.location.reload();
-    })
+    if (price <= 0) {
+      alert("Price should be greater than 0");
+      return;
+    }
+    dispatch(updateEventPrice({ eid, eeventname, price, equantity }))
+      .unwrap()
+      .then(() => {
+        navigate("/uploadedevents");
+        window.location.reload();
+      });
   };
+  
   
   return (
     <div>

@@ -40,15 +40,13 @@ const App = () => {
         <Link to={"/"} className="navbar-brand">
           Ticketing System
         </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-        </div>
         {currentUser ? (
-          <div className="navbar-nav ml-auto">
+          <div className="navbar-nav mr-1">
+            <li className="nav-item">
+                <Link to={"/home"} className="nav-link">
+                    Home
+                </Link>
+            </li>
             <li className="nav-item">
               <Link to={"/orders"} className="nav-link">
                 Orders
@@ -76,7 +74,7 @@ const App = () => {
             </li>
           </div>
         ) : (
-          <div className="navbar-nav ml-auto">
+          <div className="navbar-nav mr-1">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
                 Login

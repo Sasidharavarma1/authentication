@@ -7,6 +7,7 @@ import UserService from "../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { addNew } from "../redux/slices/AddNew";
 import { useDispatch } from "react-redux";
+
 const Addnew = () => {
   const form = useRef();
   const checkBtn = useRef();
@@ -15,28 +16,37 @@ const Addnew = () => {
   const [quantity, setQuantity] = useState("");
   const [successful, setSuccessful] = useState(false);
   const dispatch=useDispatch(); 
+  const navigate = useNavigate();
+
   const onChangEventname = (e) => {
     const eventname = e.target.value;
     setEventname(eventname);
   };
+
   const onChangePrice = (e) => {
     const price = e.target.value;
     setPrice(price);
   };
+
   const onChangeQuantity = (e) => {
     const quantity = e.target.value;
     setQuantity(quantity);
   };
-  const navigate = useNavigate();
+
   const handleAddevent = (e) => {
     e.preventDefault();
-    dispatch(addNew({ eventname, price,quantity }))
-    .unwrap()
-    .then(() => {
-      navigate("/uploadedevents");
-      window.location.reload();
-    })
+    if (price > 0 && quantity > 0 && eventname !== "") {
+      dispatch(addNew({ eventname, price,quantity }))
+        .unwrap()
+        .then(() => {
+          navigate("/uploadedevents");
+          window.location.reload();
+        })
+    } else {
+      alert("Please enter a valid event name, price and quantity.");
+    }
   };
+
   return (
     <div className="col-6 col-md-12">
       <div className="card card-container">
@@ -86,4 +96,5 @@ const Addnew = () => {
     </div>
   );
 };
+
 export default Addnew;

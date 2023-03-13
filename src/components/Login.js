@@ -16,6 +16,7 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -30,14 +31,16 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage(""); // reset error message on each login attempt
     dispatch(login({ userName, password }))
       .unwrap()
       .then(() => {
         navigate("/home");
         window.location.reload();
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false);
+        setErrorMessage("Your username or password is incorrect."); // set error message for incorrect credentials
       });
   };
 
@@ -73,7 +76,13 @@ const Login = () => {
               <span>Login</span>
             </button>
           </div>
-          { }
+          {errorMessage && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {errorMessage}
+              </div>
+            </div>
+          )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
@@ -82,5 +91,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
