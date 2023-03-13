@@ -6,7 +6,7 @@ import CheckButton from "react-validation/build/button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../redux/slices/SliceTks";
-
+import "../css/LoginandSignUp.css"
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();

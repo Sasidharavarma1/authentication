@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import AuthService from "../services/auth.service";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/SliceTks";
-
+import '../css/LoginandSignUp.css'
 const Login = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage(""); // reset error message on each login attempt
+    setErrorMessage(""); 
     dispatch(login({ userName, password }))
       .unwrap()
       .then(() => {
@@ -40,7 +39,7 @@ const Login = () => {
       })
       .catch((error) => {
         setLoading(false);
-        setErrorMessage("Your username or password is incorrect."); // set error message for incorrect credentials
+        setErrorMessage("Your username or password is incorrect."); 
       });
   };
 

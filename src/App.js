@@ -36,12 +36,12 @@ const App = () => {
   };
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-danger">
+      <nav className="navbar navbar-expand navbar-dark text-white bg-info">
         <Link to={"/"} className="navbar-brand">
           Ticketing System
         </Link>
         {currentUser ? (
-          <div className="navbar-nav mr-1">
+          <div className="navbar-nav text-white mr-1">
             <li className="nav-item">
                 <Link to={"/home"} className="nav-link">
                     Home
