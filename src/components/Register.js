@@ -37,6 +37,14 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if(username.length == 0){
+      setMessage("Enter a Valid Username");
+      return;
+    }
+    if(email.length == 0){
+      setMessage("Enter a Valid email");
+      return;
+    }
     if (password.length < 8) {
       setMessage("Password must be at least 8 characters long");
       return;

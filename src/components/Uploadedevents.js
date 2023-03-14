@@ -21,6 +21,7 @@ function Uploadedevents() {
                         <td> Event Name</td>
                         <td> Price</td>
                         <td> Quantity</td>
+                        <td>       </td>
                     </tr>
                 </thead>
                 <tbody>
