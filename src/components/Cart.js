@@ -21,6 +21,7 @@ function Cart() {
                             <td>Eventname</td>
                             <td>Quantity</td>
                             <td>Price</td>
+                            <td>      </td>
                         </tr>
                     </thead>
                     <tbody>

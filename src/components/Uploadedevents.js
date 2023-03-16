@@ -33,7 +33,7 @@ function Uploadedevents() {
                                 <td> {event.quantity}</td>
                                 <td>
                                     <Link to={`/update/${event.eventid}/${event.eventname}/${event.price}/${event.quantity}`}>
-                                        <span className="bg-success button">Update</span>
+                                        <span className="bg-info button">Update</span>
                                     </Link>
                                 </td>
                             </tr>

@@ -5,7 +5,6 @@ export const fetchEvents = createAsyncThunk(
     "events/fetchEvents",
     async () => {
       const response = await axios.get("http://localhost:7083/api/getallevents");
-      console.log(response.data);
       return response.data;
     }
   );

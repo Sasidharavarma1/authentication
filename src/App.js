@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { NavLink as Link} from "react-router-dom";
 import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -42,33 +43,33 @@ const App = () => {
         </Link>
         {currentUser ? (
           <div className="navbar-nav text-white mr-1">
-            <li className="nav-item">
-                <Link to={"/home"} className="nav-link">
+            <li className="nav-item" >
+                <Link to={"/home"} className="nav-link " activeClassName="active" > 
                     Home
                 </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/orders"} className="nav-link">
+              <Link to={"/orders"} className="nav-link text-white">
                 Orders
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/cart"} className="nav-link">
+              <Link to={"/cart"} className="nav-link text-white">
                 Cart
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/addnew"} className="nav-link">
+              <Link to={"/addnew"} className="nav-link text-white">
                 Add New
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/uploadedevents"} className="nav-link">
+              <Link to={"/uploadedevents"} className="nav-link text-white">
                 Uploaded
               </Link>
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
+              <a href="/login" className="nav-link text-white" onClick={logOut}>
                 LogOut
               </a>
             </li>
@@ -76,13 +77,14 @@ const App = () => {
         ) : (
           <div className="navbar-nav mr-1">
             <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
+              <Link to={"/login"} className="nav-link text-white">
                 Login
               </Link>
             </li>
+            
 
             <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
+              <Link to={"/register"} className="nav-link text-white">
                 Sign Up
               </Link>
             </li>

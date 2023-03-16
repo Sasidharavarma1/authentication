@@ -45,7 +45,7 @@ const addnew = (eventname, price, quantity) => {
 };
 const update = (eventid, eventname, price, quantity) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  return axios.post("http://localhost:7083/api/events/update", {
+  return axios.put("http://localhost:7083/api/events/update", {
     eventid,
     eventname,
     price,

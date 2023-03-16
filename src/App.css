@@ -44,3 +44,7 @@ div{
     transform: rotate(360deg);
   }
 }
+.active {
+  border: 2px solid black;
+  border-radius: 100px;
+}
